@@ -1,90 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleApplication2
 {
-    
-        class Car
-        {
-            public string name;
-            public string model;
-            public int airbags;
-            public int price;
-            public Boolean power_steering;
-            public int engine_diplacement;
-        public static void insert(Car cars)
-        {
-            Console.WriteLine("enter name: ");
-            cars.name = Console.ReadLine();
-            Console.WriteLine("\n enter model: ");
-            cars.model = Console.ReadLine();
-            Console.WriteLine("\n enter no of airbags:");
-            cars.airbags = int.Parse(Console.ReadLine());
-            Console.WriteLine("\n enter price: ");
-            cars.price = int.Parse(Console.ReadLine());
-            Console.WriteLine("\n power steering true or false: ");
-            cars.power_steering = Boolean.Parse(Console.ReadLine());
-            Console.WriteLine("\n engine displacement: ");
-            cars.engine_diplacement = int.Parse(Console.ReadLine());
-           
-        }
-        public static void disp(Car c)
-        {
-            Console.WriteLine("name:{0} \n", c.name);
-            Console.WriteLine("model:{0} \n", c.model);
-            Console.WriteLine("price:{0} \n", c.price);
-            Console.WriteLine("airbags:{0} \n", c.airbags);
-            Console.WriteLine("power_steering:{0} \n", c.power_steering);
-            Console.WriteLine("engine_diplacement:{0} \n", c.engine_diplacement);
-        }
 
-
-        }
-        class Bike
-        {
-            
-            public string name;
-            public string model;
-           // public int airbags;
-            public int price;
-            public Boolean kick_start;
-            public int engine_diplacement;
-         public static void insert(Bike bikes)
-        {
-            Console.WriteLine("enter name: ");
-            bikes.name = Console.ReadLine();
-            Console.WriteLine("\n enter model: ");
-            bikes.model = Console.ReadLine();
-            //Console.WriteLine("\n enter no of airbags:");
-            //bikes.airbags = int.Parse(Console.ReadLine());
-            Console.WriteLine("\n enter price: ");
-            bikes.price = int.Parse(Console.ReadLine());
-            Console.WriteLine("\n kick start true or false: ");
-            bikes.kick_start = Boolean.Parse(Console.ReadLine());
-            Console.WriteLine("\n engine displacement: ");
-            bikes.engine_diplacement = int.Parse(Console.ReadLine());
-        }
-        public static void disp(Bike b)
-        {
-            Console.WriteLine("name:{0} \n", b.name);
-            Console.WriteLine("model:{0} \n", b.model);
-            Console.WriteLine("price:{0} \n", b.price);
-            // Console.WriteLine("airbags:{0} \n", b.airbags);
-            Console.WriteLine("kick_start:{0} \n", b.kick_start);
-            Console.WriteLine("engine_diplacement:{0} \n", b.engine_diplacement);
-        }
-        }
     class Vehicle
     {
         static void Main(string[] args)
         {
             int option = 0;
             //bike bikes = new bike();
-            List<Car> carsl = new List<Car>();
-            List<Bike> bikesl = new List<Bike>();
+            List<Car> carsList = new List<Car>();
+            List<Bike> bikesList = new List<Bike>();
             while (option != 5)
             {
 
@@ -93,30 +20,27 @@ namespace ConsoleApplication2
                 switch (option)
                 {
                     case 1:
-                        Car cars = new Car();
-                        Car.insert(cars);
-                        carsl.Add(cars);
+                        Car cars = _ReadCarFromconsole();//new Car(/*"Maruti", "2000"*/);
+                        carsList.Add(cars);
+                        //cars.model = "";
                         break;
 
                     case 2:
-                        Bike bikes = new Bike();
-                        Bike.insert(bikes);
-                        bikesl.Add(bikes);
+                        Bike bikes = _ReadBikeFromConsole();
+                        bikesList.Add(bikes);
                         break;
 
                     case 3:
-                        foreach(Car c in carsl)
+                        foreach (Car car in carsList)
                         {
-                            Car.disp(c);
-                           
+                            _DisplayCarOnConsole(car);
                         }
-
                         break;
 
                     case 4:
-                        foreach (Bike b in bikesl)
+                        foreach (Bike bike in bikesList)
                         {
-                            Bike.disp(b);
+                            _DisplayBikeOnConsole(bike);
                         }
                         break;
 
@@ -129,6 +53,62 @@ namespace ConsoleApplication2
                 }
             }
         }
-        
+
+        private static Bike _ReadBikeFromConsole()
+        {
+            Bike bike = new Bike();
+            Console.WriteLine("enter name: ");
+            bike.Name = Console.ReadLine();
+            Console.WriteLine("\n enter model: ");
+            bike.Model = Console.ReadLine();
+            Console.WriteLine("\n enter price: ");
+            bike.Price = int.Parse(Console.ReadLine());
+            Console.WriteLine("\n kick start true or false: ");
+            bike.KickStart = Boolean.Parse(Console.ReadLine());
+            Console.WriteLine("\n engine displacement: ");
+            bike.EngineDisplacement = int.Parse(Console.ReadLine());
+            return bike;
+        }
+
+        private static Car _ReadCarFromconsole()
+        {
+            //Car myCar = new Car("Maruti", "2000");
+            //Console.WriteLine(myCar.Name);
+            //myCar.MyMethod();
+
+            Car cars = new Car();
+            Console.WriteLine("enter name: ");
+            cars.Name = Console.ReadLine();
+            Console.WriteLine("\n enter model: ");
+            cars.Model = Console.ReadLine();
+            Console.WriteLine("\n enter no of airbags:");
+            cars.AirBags = int.Parse(Console.ReadLine());
+            Console.WriteLine("\n enter price: ");
+            cars.Price = int.Parse(Console.ReadLine());
+            Console.WriteLine("\n power steering true or false: ");
+            cars.PowerSteering = Boolean.Parse(Console.ReadLine());
+            Console.WriteLine("\n engine displacement: ");
+            cars.EngineDisplacement = int.Parse(Console.ReadLine());
+            return cars;
+        }
+
+        private static void _DisplayCarOnConsole(Car c)
+        {
+            Console.WriteLine("name:{0} \n", c.Name);
+            Console.WriteLine("model:{0} \n", c.Model);
+            Console.WriteLine("price:{0} \n", c.Price);
+            Console.WriteLine("airbags:{0} \n", c.AirBags);
+            Console.WriteLine("power_steering:{0} \n", c.PowerSteering);
+            Console.WriteLine("engine_diplacement:{0} \n", c.EngineDisplacement);
+        }
+        private static void _DisplayBikeOnConsole(Bike b)
+        {
+            Console.WriteLine("name:{0} \n", b.Name);
+            Console.WriteLine("model:{0} \n", b.Model);
+            Console.WriteLine("price:{0} \n", b.Price);
+            Console.WriteLine("kick_start:{0} \n", b.KickStart);
+            Console.WriteLine("engine_diplacement:{0} \n", b.EngineDisplacement);
+        }
+
     }
 }

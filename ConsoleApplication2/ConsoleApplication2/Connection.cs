@@ -98,7 +98,7 @@ namespace ConsoleApplication2
 
         }
 
-        public static void GetTable<T>(T vehicle)
+        public static void GetDataTable<T>(T vehicle)
         {
             DataTable vehicleTable = Vehicles.CreateTable(vehicle);
             string connString = ConfigurationManager.ConnectionStrings["firstdbConnectionString"].ConnectionString;

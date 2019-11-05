@@ -1,36 +1,37 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.IO;
 
 namespace ConsoleApplication2
 {
     class Car : Vehicles
     {
+
         public int AirBags
         {
             get;
 
-            set;
+            private set;
 
         }
 
         public Boolean PowerSteering
         {
             get;
-            set;
+            private set;
 
         }
 
-        //public Car(string name, string model)
-        //{
-        //    this.Name = name;
-        //    this.Model = model;
-        //}
-
-        //public string MyMethod()
-        //{
-        //    return this.Name;
-        //}
-
-
+        public Car(int type,string name, string model, int airBags, int price, Boolean powerSteering, int engineDisplacement) : base(type, name, model, price, engineDisplacement)
+        {
+            this.AirBags = airBags;
+            this.PowerSteering = powerSteering;
+        }
+       
 
     }
 }

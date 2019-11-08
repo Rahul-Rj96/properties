@@ -8,7 +8,7 @@ using System.IO;
 
 namespace ConsoleApplication2
 {
-    class Car : Vehicles
+    public class Car : Vehicles
     {
 
         public int AirBags

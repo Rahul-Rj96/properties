@@ -4,7 +4,7 @@ using System.Data;
 
 namespace ConsoleApplication2
 {
-    abstract class Vehicles
+    public abstract class Vehicles
     {
         private string name;
         public string Name

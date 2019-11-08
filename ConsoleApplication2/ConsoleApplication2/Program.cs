@@ -7,13 +7,16 @@ using System.IO;
 namespace ConsoleApplication2
 {
 
-    class Vehicle
+   public class Vehicle
     {
+        public static List<Car> carsViewList = new List<Car>();
+        public static List<Bike> bikesViewList = new List<Bike>();
+
         static void Main(string[] args)
         {
             int option = 0;
-            List<Car> carsViewList = new List<Car>();
-            List<Bike> bikesViewList = new List<Bike>();
+            
+    
             while (option != 5)
             {
 

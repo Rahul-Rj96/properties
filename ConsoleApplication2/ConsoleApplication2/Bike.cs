@@ -8,7 +8,7 @@ using System.IO;
 
 namespace ConsoleApplication2
 {
-    class Bike : Vehicles
+    public class Bike : Vehicles
     {
         public Boolean KickStart
         {

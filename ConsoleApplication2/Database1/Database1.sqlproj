@@ -66,7 +66,6 @@
     <Build Include="dbo\Tables\vehicle.sql" />
     <Build Include="dbo\Tables\People.sql" />
     <Build Include="dbo\Stored Procedures\Proc_Vehicle_Insert.sql" />
-    <Build Include="dbo\Stored Procedures\Proc_Car_Vehicle_Insert.sql" />
     <Build Include="dbo\Stored Procedures\Proc_Car_Vehicle_Info.sql" />
     <Build Include="dbo\Stored Procedures\Proc_Bike_Vehicle_Info.sql" />
     <Build Include="dbo\User Defined Types\Tablevehicle.sql" />

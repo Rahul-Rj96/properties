@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApplication2
 {
-    class Connection
+   public class Connection
     {
         
         public static List<Car> ConnectionForReadingCar()

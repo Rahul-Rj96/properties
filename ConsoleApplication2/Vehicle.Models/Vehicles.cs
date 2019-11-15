@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace ConsoleApplication2
+namespace Vehicle.Models
 {
     public abstract class Vehicles
     {
@@ -40,7 +43,7 @@ namespace ConsoleApplication2
             get;
             protected set;
         }
-        public Vehicles(int type,string name,string model,int price,int engineDisplacement)
+        public Vehicles(int type, string name, string model, int price, int engineDisplacement)
         {
             this.Name = name;
             this.Type = type;
@@ -65,7 +68,7 @@ namespace ConsoleApplication2
             {
                 Car car = vehicle as Car;
                 dt.Rows.Add(car.Type, car.Name, car.Model, car.Price, null, car.PowerSteering, car.AirBags, car.EngineDisplacement);
-            } 
+            }
             else if (vehicle is Bike)
             {
                 Bike bike = vehicle as Bike;

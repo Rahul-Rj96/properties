@@ -1,12 +1,10 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace ConsoleApplication2
+namespace Vehicle.Models
 {
     public class Car : Vehicles
     {
@@ -26,12 +24,12 @@ namespace ConsoleApplication2
 
         }
 
-        public Car(int type,string name, string model, int airBags, int price, Boolean powerSteering, int engineDisplacement) : base(type, name, model, price, engineDisplacement)
+        public Car(int type, string name, string model, int airBags, int price, Boolean powerSteering, int engineDisplacement) : base(type, name, model, price, engineDisplacement)
         {
             this.AirBags = airBags;
             this.PowerSteering = powerSteering;
         }
-       
+
 
     }
 }

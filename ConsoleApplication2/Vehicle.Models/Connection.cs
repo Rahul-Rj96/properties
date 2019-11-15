@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApplication2
+namespace Vehicle.Models
 {
-   public class Connection
+    public class Connection
     {
-        
+
         public static List<Car> ConnectionForReadingCar()
         {
             int vehicleType, vehiclePrice, airBags, engineDisplacement;
@@ -55,6 +55,49 @@ namespace ConsoleApplication2
             return carsViewList;
 
         }
+
+        public static Car ConnectionForReadingCarId(int id)
+        {
+            int vehicleType, vehiclePrice, airBags, engineDisplacement;
+            string vehicleName, vehicleModel;
+            bool powerSteering;
+            Car cars = null;
+           string connString = ConfigurationManager.ConnectionStrings["firstdbConnectionString"].ConnectionString;       //read from config  
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connString))
+                {
+                    String spName = @"[Proc_Car_Info_id]";
+                    SqlCommand cmd = new SqlCommand(spName, conn);
+                    conn.Open();
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    SqlParameter param = cmd.Parameters.Add("@id", SqlDbType.Int);
+                    param.Value = id;
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    if (dr.HasRows && dr.Read())
+                    {                                          
+                            vehicleType = Convert.ToInt32(dr["VehicleType"]);
+                            vehicleName = Convert.ToString(dr["VehicleName"]);
+                            vehicleModel = Convert.ToString(dr["VehicleModel"]);
+                            vehiclePrice = Convert.ToInt32(dr["VehiclePrice"]);
+                            powerSteering = Convert.ToBoolean(dr["PowerSteering"]);
+                            airBags = Convert.ToInt32(dr["AirBags"]);
+                            engineDisplacement = Convert.ToInt32(dr["EngineDisplacement"]);
+                            cars = new Car(vehicleType, vehicleName, vehicleModel, airBags, vehiclePrice, powerSteering, engineDisplacement);                        
+
+                    }
+                    dr.Close();
+                    conn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception:" + ex.Message);
+            }
+            return cars;
+
+        } 
+
         public static List<Bike> ConnectionForReadingBike()
         {
             int vehicleType, vehiclePrice, engineDisplacement;
@@ -98,7 +141,54 @@ namespace ConsoleApplication2
 
         }
 
-        public static void GetDataTable<T>(T vehicle)
+        public static Bike ConnectionForReadingBikeId(int id)
+        {
+            int vehicleType, vehiclePrice, engineDisplacement;
+            string vehicleName, vehicleModel;
+            bool kickStart;
+            Bike bikes = null;
+            string connString = ConfigurationManager.ConnectionStrings["firstdbConnectionString"].ConnectionString;
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connString))
+                {
+                    String spName = @"dbo.[Proc_Bike_Info_id]";
+                    SqlCommand cmd = new SqlCommand(spName, conn);
+                    conn.Open();
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    SqlParameter param = cmd.Parameters.Add("@id", SqlDbType.Int);
+                    param.Value = id;
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    
+                    if (dr.HasRows && dr.Read())
+                    {
+                       // while (dr.Read())
+                       // {
+                       
+                            vehicleType = Convert.ToInt32(dr["VehicleType"]);
+                            vehicleName = Convert.ToString(dr["VehicleName"]);
+                            vehicleModel = Convert.ToString(dr["VehicleModel"]);
+                            vehiclePrice = Convert.ToInt32(dr["VehiclePrice"]);
+                            kickStart = Convert.ToBoolean(dr["KickStart"]);
+                            engineDisplacement = Convert.ToInt32(dr["EngineDisplacement"]);
+                            bikes = new Bike(vehicleType, vehicleName, vehicleModel, vehiclePrice, kickStart, engineDisplacement);
+                           // bikesViewList.Add(bikes);
+                     //   }
+
+                    }
+                    dr.Close();
+                    conn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception:" + ex.Message);
+            }
+            return bikes;
+
+        }
+
+        public static void WriteDataTable<T>(T vehicle)
         {
             DataTable vehicleTable = Vehicles.CreateTable(vehicle);
             string connString = ConfigurationManager.ConnectionStrings["firstdbConnectionString"].ConnectionString;

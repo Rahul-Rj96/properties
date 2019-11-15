@@ -154,9 +154,13 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ConsoleApplication2\ConsoleApplication2.csproj">
+    <ProjectReference Include="..\ConsoleApplication2\Vehicles.Console.csproj">
       <Project>{48ff168d-313e-415a-8caa-3a30ea753851}</Project>
-      <Name>ConsoleApplication2</Name>
+      <Name>Vehicles.Console</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Vehicle.Models\Vehicle.Models.csproj">
+      <Project>{BB4B47C3-F94A-4F32-950C-21D8C0B4CC7A}</Project>
+      <Name>Vehicle.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

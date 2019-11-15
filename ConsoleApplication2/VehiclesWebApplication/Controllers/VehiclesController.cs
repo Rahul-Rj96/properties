@@ -4,9 +4,9 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using ConsoleApplication2;
 using System.Web.Http.Cors;
 using Newtonsoft.Json;
+using Vehicle.Models;
 
 namespace VehiclesWebApplication.Controllers
 {
@@ -18,27 +18,44 @@ namespace VehiclesWebApplication.Controllers
         [HttpGet, Route("car")]
         public IEnumerable<Car> GetCarView()
         {
-            Vehicle.carsViewList.Clear();
-            Vehicle.carsViewList.AddRange(Connection.ConnectionForReadingCar());
-            return Vehicle.carsViewList;
+            List<Car> carsViewList =Connection.ConnectionForReadingCar();
+            return carsViewList;
 
         }
+
+        [HttpGet, Route("car/{id}")]
+        public Car GetCarViewId(int id)
+        {
+            return Connection.ConnectionForReadingCarId(id);
+        }
+
+        [HttpGet, Route("bike/{id}")]
+        public Bike GetBikeViewId(int id)
+        {           
+            return Connection.ConnectionForReadingBikeId(id);          
+        }
+
         [HttpGet, Route("bike")]
         public IEnumerable<Bike> GetBikeView()
         {
-            Vehicle.bikesViewList.Clear();
-            Vehicle.bikesViewList.AddRange(Connection.ConnectionForReadingBike());
-            return Vehicle.bikesViewList;
+            List<Bike> bikesViewList = new List<Bike>();
+            bikesViewList=(Connection.ConnectionForReadingBike());
+            return bikesViewList;
         }
+
         [HttpPost, Route("car")]
-        public void PostWriteCar(Car car)
+        public IHttpActionResult PostWriteCar(Car car)
         {
-            Connection.GetDataTable(car);
+            Connection.WriteDataTable(car);
+            return Ok("Successfully entered to db");
         }
+
         [HttpPost, Route("bike")]
-        public void PostWriteBike(Bike bike)
+        public IHttpActionResult PostWriteBike(Bike bike)
         {
-            Connection.GetDataTable(bike);
+            Connection.WriteDataTable(bike);
+            return Ok("Successfully entered to db");
         }
     }
 }
+

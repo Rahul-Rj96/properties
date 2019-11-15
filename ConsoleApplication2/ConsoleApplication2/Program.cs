@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
+using Vehicle.Models;
 
 namespace ConsoleApplication2
 {
 
    public class Vehicle
     {
-        public static List<Car> carsViewList = new List<Car>();
-        public static List<Bike> bikesViewList = new List<Bike>();
+        private static List<Car> carsViewList = new List<Car>();
+        private static List<Bike> bikesViewList = new List<Bike>();
 
         static void Main(string[] args)
         {
@@ -26,12 +27,12 @@ namespace ConsoleApplication2
                 {
                     case 1:
                         Car cars = _ReadCarFromconsole();
-                        Connection.GetDataTable(cars);
+                        Connection.WriteDataTable(cars);
                         break;
 
                     case 2:
                         Bike bikes = _ReadBikeFromConsole();
-                        Connection.GetDataTable(bikes);
+                        Connection.WriteDataTable(bikes);
                         break;
 
                     case 3:

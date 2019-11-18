@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>VehicleDetails</title>
+    
+</head>
+<body>
+   <!--<p id="ResultsP" />-->
+        <input type="button" value="View All Cars" onclick="carsList();"/>
+    <input type="button" value="View All Bikes" onclick="bikesList();" />
+    <!--<script>
+        //var i = 404;
+        ////document.write(i);
+        //document.getElementById('ResultsP').innerHTML = 'Hello World!';
+        //document.bgColor = "grey";
+    </script>-->
+    <table id="vehicleTable" >
+        <thead>
+         <tr>
+            <th>No.</th>
+            <th>Type</th>
+            <th>Model</th>
+            <th>Name</th>
+            <th>PowerSteering</th>
+            <th>KickStart</th>
+            <th>AirBags</th>
+            <th>Price</th>
+            <th>EngineDisplacement</th>
+            </tr>
+        </thead>
+
+    </table><br />
+    <input type="number" id="bikeId"/>
+    <input type="button" value="View bike" onclick="bikesListId();" /> <br />
+    <br />
+    <input type="number" id="carId" />
+    <input type="button" value="View Car" onclick="carsListId();" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+    </script>
+    <script src="ScriptVehicle.js">
+    </script>
+</body>
+</html>

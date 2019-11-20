@@ -1,41 +1,108 @@
+var Car = {
+    Type: 1,
+    Model: "",
+    Name: "",
+    PowerSteering: "",
+    AirBags: null,
+    Price: null,
+    EngineDisplacement:null
+}
+var Bike = {
+    Type: 0,
+    Model: "",
+    Name: "",
+    KickStart: "",
+    Price: null,
+    EngineDisplacement: null
+}
+function SubmitCar() {
+    Car = new Object();
+    Car.Type = 1;
+    Car.Name = $("#carName").val();
+    Car.Model = $("#carModel").val();
+    Car.PowerSteering = $('#powerSteering').is(':checked');
+    Car.Price = $("#carPrice").val();
+    Car.AirBags = $("#airBags").val();
+    Car.EngineDisplacement = $("#carEngineDisplacement").val();
+    VehicleAddCar(Car);
 
-function carsList() {
+}
+
+function SubmitBike() {
+    Bike = new Object();
+    Bike.Type = 0;
+    Bike.Name = $("#bikeName").val();
+    Bike.Model = $("#bikeModel").val();
+    Bike.KickStart = $('#kickStart').is(':checked');
+    Bike.Price = $("#bikePrice").val();
+    Bike.EngineDisplacement = $("#bikeEngineDisplacement").val();
+    VehicleAddBike(Bike);
+}
+function VehicleAddCar(Car) {
+    $.ajax({
+        url: 'http://vehicledata.dev19.grcdev.com/api/vehicle/car',
+        type: 'POST',
+        contentType: "application/json;charset=utf-8",
+        data: JSON.stringify(Car),
+        success: function (Car) {
+        alert(Car);
+           // productAddSuccess(Car);
+        },
+    });
+}
+function VehicleAddBike(Bike) {
+    $.ajax({
+        url: 'http://vehicledata.dev19.grcdev.com/api/vehicle/bike',
+        type: 'POST',
+        contentType: "application/json;charset=utf-8",
+        data: JSON.stringify(Bike),
+        success: function (Bike) {
+            alert(Bike);
+            // productAddSuccess(Car);
+        },
+    });
+}
+
+function CarsList() {
     $.ajax
     ({
         url: 'http://vehicledata.dev19.grcdev.com/api/vehicle/car',
         type: 'GET',
         dataType: 'json',
         success: function (vehicles) {
-            vehicleListSuccess(vehicles);
+            VehicleListSuccess(vehicles);
         }
     })
 }
-function bikesList() {
+function BikesList() {
     $.ajax
     ({
         url: 'http://vehicledata.dev19.grcdev.com/api/vehicle/bike',
         type: 'GET',
         dataType: 'json',
         success: function (vehicles) {
-            vehicleListSuccess(vehicles);
+            VehicleListSuccess(vehicles);
         }
     })
 }
-function bikesListId() {
+function BikesListId() {
     id = $("#bikeId").val();
-    $.ajax
-    ({
-        url: 'http://vehicledata.dev19.grcdev.com/api/vehicle/bike/' + id,
-        type: 'GET',
-        dataType: 'json',
-        success: function (vehicle) {
-            index = 0;
-            vehicleAddRow(vehicle, index);
-        }
-    })
+    console.log(id);
+        $.ajax
+        ({
+            url: 'http://vehicledata.dev19.grcdev.com/api/vehicle/bike/' + id,
+            type: 'GET',
+            dataType: 'json',
+            success: function (vehicle) {
+                index = 0;
+                VehicleAddRow(vehicle, index);
+            }
+        })
+    
 }
-function carsListId() {
+function CarsListId() {
     id = $("#carId").val();
+    console.log(id);
     $.ajax
     ({
         url: 'http://vehicledata.dev19.grcdev.com/api/vehicle/car/' + id,
@@ -43,17 +110,19 @@ function carsListId() {
         dataType: 'json',
         success: function (vehicle) {
             index = 0;
-            vehicleAddRow(vehicle, index);
+            VehicleAddRow(vehicle, index);
         }
-    })
+    });
 }
-function vehicleListSuccess(vehicles) {
+
+
+
+function VehicleListSuccess(vehicles) {
     $.each(vehicles, function (index, vehicle) {
-        console.log(vehicle);
-        vehicleAddRow(vehicle, index);
+        VehicleAddRow(vehicle, index);
     })
 }
-function vehicleAddRow(vehicle, index) {
+function VehicleAddRow(vehicle, index) {
     if (index == 0) {
         $("#vehicleTable tbody").empty();
     }
@@ -61,34 +130,39 @@ function vehicleAddRow(vehicle, index) {
         $("#vehicleTable").append("<tbody></tbody>");
     }
     $("#vehicleTable tbody").append(
-      productBuildTableRow(vehicle, index));
+      VehicleBuildTableRow(vehicle, index));
 }
-function productBuildTableRow(vehicle, index) {
-    if (vehicle.Type == 1) {
-        var type = "Car";
-        var KickStart = "NuLL";
-        var AirBags = vehicle.AirBags;
-        var PowerSteering = vehicle.PowerSteering;
+function VehicleBuildTableRow(vehicle, index) {
+    if (vehicle != null && vehicle.Type != undefined) {
+        if (vehicle.Type == 1) {
+            var type = "Car";
+            var KickStart = "NuLL";
+            var AirBags = vehicle.AirBags;
+            var PowerSteering = vehicle.PowerSteering;
+        }
+        else if(vehicle.Type==0){
+            var type = "Bike";
+            var KickStart = vehicle.KickStart;
+            var PowerSteering = "NuLL";
+            var AirBags = "NuLL";
+        }
+        var ret =
+          "<tr>" +
+           "<td>" + index + "</td>" +
+           "<td>" + type + "</td>" +
+           "<td>" + vehicle.Model + "</td>"
+            + "<td>" + vehicle.Name + "</td>" +
+            "<td>" + PowerSteering + "</td>"
+            + "<td>" + KickStart + "</td>"
+            + "<td>" + AirBags + "</td>"
+            + "<td>" + vehicle.Price + "</td>" +
+            "<td>" + vehicle.EngineDisplacement + "</td>"
+        "</tr>";
+        return ret;
     }
     else {
-        var type = "Bike";
-        var KickStart = vehicle.KickStart;
-        var PowerSteering = "NuLL";
-        var AirBags = "NuLL";
+        alert("No Data To Show !!!");
     }
-    var ret =
-      "<tr>" +
-       "<td>" + index + "</td>" +
-       "<td>" + type + "</td>" +
-       "<td>" + vehicle.Model + "</td>"
-        + "<td>" + vehicle.Name + "</td>" +
-        "<td>" + PowerSteering + "</td>"
-        + "<td>" + KickStart + "</td>"
-        + "<td>" + AirBags + "</td>"
-        + "<td>" + vehicle.Price + "</td>" +
-        "<td>" + vehicle.EngineDisplacement + "</td>"
-    "</tr>";
-    return ret;
 }
 
 

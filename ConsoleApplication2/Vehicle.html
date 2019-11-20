@@ -6,8 +6,8 @@
 </head>
 <body>
    <!--<p id="ResultsP" />-->
-        <input type="button" value="View All Cars" onclick="carsList();"/>
-    <input type="button" value="View All Bikes" onclick="bikesList();" />
+        <input type="button" value="View All Cars" onclick="CarsList();"/>
+    <input type="button" value="View All Bikes" onclick="BikesList();" />
     <!--<script>
         //var i = 404;
         ////document.write(i);
@@ -31,11 +31,31 @@
 
     </table><br />
     <input type="number" id="bikeId"/>
-    <input type="button" value="View bike" onclick="bikesListId();" /> <br />
+    <input type="button" value="View bike" onclick="BikesListId();" /> <br />
     <br />
     <input type="number" id="carId" />
-    <input type="button" value="View Car" onclick="carsListId();" />
-
+    <input type="button" value="View Car" onclick="CarsListId();" /><br /><br />
+    <!--<input type="button" value="Enter Car " onclick="carfield.hidden"/>
+    <input type="button" value="Enter Bike " onclick="showBikeFields();" /><br /><br />-->
+        <div>
+            Name : <input type="text" id="carName" />
+            Model : <input type="text" id="carModel" /><br /><br />
+            PowerSteering : <input type="checkbox" id="powerSteering"  />
+            AirBags : <input type="number" id="airBags" /><br /><br />
+            Price : <input type="number" id="carPrice" /><br /><br />
+            Engine Displacement : <input type="number" id="carEngineDisplacement" /><br /><br />
+            <input type="button" id="submitcar" value="Submit Car " onclick="SubmitCar();" />
+        </div>
+  <br /><br />
+        <div>
+            Name : <input type="text" id="bikeName" />
+            Model : <input type="text" id="bikeModel" /><br /><br />
+            KickStart : <input type="checkbox" id="kickStart" value="off"/><br /><br />
+            Price : <input type="number" id="bikePrice" /><br /><br />
+            Engine Displacement : <input type="number" id="bikeEngineDisplacement" /><br /><br />
+            <input type="button" id="submitbike" value="Submit Bike" onclick="SubmitBike();" />
+        </div>
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
     </script>
     <script src="ScriptVehicle.js">

@@ -2,63 +2,142 @@
 <html>
 <head>
     <title>VehicleDetails</title>
-    
-</head>
-<body>
-   <!--<p id="ResultsP" />-->
-        <input type="button" value="View All Cars" onclick="CarsList();"/>
-    <input type="button" value="View All Bikes" onclick="BikesList();" />
-    <!--<script>
-        //var i = 404;
-        ////document.write(i);
-        //document.getElementById('ResultsP').innerHTML = 'Hello World!';
-        //document.bgColor = "grey";
-    </script>-->
-    <table id="vehicleTable" >
-        <thead>
-         <tr>
-            <th>No.</th>
-            <th>Type</th>
-            <th>Model</th>
-            <th>Name</th>
-            <th>PowerSteering</th>
-            <th>KickStart</th>
-            <th>AirBags</th>
-            <th>Price</th>
-            <th>EngineDisplacement</th>
-            </tr>
-        </thead>
+    <style>
+        /* Popup container - can be anything you want */
+        .popup {
+            position: absolute;
+            display: inline-block;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
 
-    </table><br />
-    <input type="number" id="bikeId"/>
-    <input type="button" value="View bike" onclick="BikesListId();" /> <br />
-    <br />
-    <input type="number" id="carId" />
-    <input type="button" value="View Car" onclick="CarsListId();" /><br /><br />
-    <!--<input type="button" value="Enter Car " onclick="carfield.hidden"/>
-    <input type="button" value="Enter Bike " onclick="showBikeFields();" /><br /><br />-->
-        <div>
-            Name : <input type="text" id="carName" />
-            Model : <input type="text" id="carModel" /><br /><br />
-            PowerSteering : <input type="checkbox" id="powerSteering"  />
-            AirBags : <input type="number" id="airBags" /><br /><br />
-            Price : <input type="number" id="carPrice" /><br /><br />
-            Engine Displacement : <input type="number" id="carEngineDisplacement" /><br /><br />
-            <input type="button" id="submitcar" value="Submit Car " onclick="SubmitCar();" />
-        </div>
-  <br /><br />
-        <div>
-            Name : <input type="text" id="bikeName" />
-            Model : <input type="text" id="bikeModel" /><br /><br />
-            KickStart : <input type="checkbox" id="kickStart" value="off"/><br /><br />
-            Price : <input type="number" id="bikePrice" /><br /><br />
-            Engine Displacement : <input type="number" id="bikeEngineDisplacement" /><br /><br />
-            <input type="button" id="submitbike" value="Submit Bike" onclick="SubmitBike();" />
-        </div>
-    
+            /* The actual popup */
+            .popup .popuptext {
+                visibility: hidden;
+                width: 560px;
+                background-color: #555;
+                color: #fff;
+                text-align: center;
+                border-radius: 6px;
+                padding: 8px 0;
+                position: absolute;
+                z-index: 1;
+                bottom: 125%;
+                left: 50%;
+                margin-left: -80px;
+            }
+
+                /* Popup arrow */
+                .popup .popuptext::after {
+                    content: "";
+                    position: absolute;
+                    top: 100%;
+                    left: 50%;
+                    margin-left: -5px;
+                    border-width: 5px;
+                    border-style: solid;
+                    border-color: #555 transparent transparent transparent;
+                }
+
+            /* Toggle this class - hide and show the popup */
+            .popup .show {
+                visibility: visible;
+                -webkit-animation: fadeIn 1s;
+                animation: fadeIn 1s;
+            }
+
+        /* Add animation (fade in the popup) */
+        @-webkit-keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
     </script>
     <script src="ScriptVehicle.js">
     </script>
+
+</head>
+<body><br /><br /><br /><br />
+    <input type="button" value="View All Cars" onclick="CarsList();"/>
+    <input type="button" value="View All Bikes" onclick="BikesList();" /><br /><br />
+    <table id="vehicleTable">
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>Type</th>
+                <th>Model</th>
+                <th>Name</th>
+                <th>PowerSteering</th>
+                <th>KickStart</th>
+                <th>AirBags</th>
+                <th>Price</th>
+                <th>EngineDisplacement</th>
+            </tr>
+        </thead>
+
+    </table><br />
+    <input type="number" id="bikeId" />
+    <input type="button" value="View bike" onclick="BikesListId();" /> <br />
+    <br />
+    <input type="number" id="carId" />
+    <input type="button" value="View Car" onclick="CarsListId();" /><br /><br /><br />
+    <div class="popup">
+        <input type="button" value="Enter Car" onclick="myFunction()" />
+        <span class="popuptext" id="myPopup">
+
+            Name : <input type="text" id="carName" />
+            Model : <input type="text" id="carModel" /><br /><br />
+            PowerSteering : <input type="checkbox" id="powerSteering" />
+            AirBags : <input type="number" id="airBags" /><br /><br />
+            Price : <input type="number" id="carPrice" /><br /><br />
+            Engine Displacement : <input type="number" id="carEngineDisplacement" /><br /><br />
+            <input type="button" id="submitcar" value="Submit Car " onclick="SubmitCar();" />
+
+        </span>
+    </div>
+    <br /><br />
+    <div class="popup">
+        <input type="button" value="Enter Bike" onclick="myFunctionBike()" />
+        <span class="popuptext" id="myPopupBike">
+            Name : <input type="text" id="bikeName" />
+            Model : <input type="text" id="bikeModel" /><br /><br />
+            KickStart : <input type="checkbox" id="kickStart" value="off" /><br /><br />
+            Price : <input type="number" id="bikePrice" /><br /><br />
+            Engine Displacement : <input type="number" id="bikeEngineDisplacement" /><br /><br />
+            <input type="button" id="submitbike" value="Submit Bike" onclick="SubmitBike();" />
+        </span>
+    </div>
+
+    <script>
+// When the user clicks on div, open the popup
+function myFunction() {
+    var popup = document.getElementById("myPopup");
+    popup.classList.toggle("show");
+}
+function myFunctionBike() {
+    var popup = document.getElementById("myPopupBike");
+    popup.classList.toggle("show");
+}
+    </script>
+
 </body>
 </html>

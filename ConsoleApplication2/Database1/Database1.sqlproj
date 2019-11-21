@@ -69,5 +69,6 @@
     <Build Include="dbo\Stored Procedures\Proc_Bike_Vehicle_Info.sql" />
     <Build Include="dbo\User Defined Types\Tablevehicle.sql" />
     <Build Include="dbo\Stored Procedures\Proc_Car_Info_id.sql" />
+    <Build Include="dbo\Stored Procedures\Proc_Bike_Info_id.sql" />
   </ItemGroup>
 </Project>

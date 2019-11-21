@@ -46,7 +46,6 @@ function VehicleAddCar(Car) {
         data: JSON.stringify(Car),
         success: function (Car) {
         alert(Car);
-           // productAddSuccess(Car);
         },
     });
 }
@@ -58,7 +57,6 @@ function VehicleAddBike(Bike) {
         data: JSON.stringify(Bike),
         success: function (Bike) {
             alert(Bike);
-            // productAddSuccess(Car);
         },
     });
 }
@@ -122,6 +120,7 @@ function VehicleListSuccess(vehicles) {
         VehicleAddRow(vehicle, index);
     })
 }
+
 function VehicleAddRow(vehicle, index) {
     if (index == 0) {
         $("#vehicleTable tbody").empty();
@@ -164,5 +163,6 @@ function VehicleBuildTableRow(vehicle, index) {
         alert("No Data To Show !!!");
     }
 }
+
 
 
